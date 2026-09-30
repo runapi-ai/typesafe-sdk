@@ -26,9 +26,4 @@ RSpec.describe RunApi::Typesafe::Resources::SystemOne do
     expect(result.model).to eq("jev-1.13.0")
     expect(result.usage).to eq("input_tokens" => 318, "output_tokens" => 34)
   end
-
-  it "raises ValidationError when required fields are missing" do
-    expect { resource.run(state: {candidate: "Option A"}, questions: {recommendation: {type: "choice", instructions: "Choose the matching candidate.", criteria: {"Option A" => "The candidate is Option A.", "Option B" => "The candidate is Option B."}}}) }
-      .to raise_error(RunApi::Core::ValidationError, /model/)
-  end
 end

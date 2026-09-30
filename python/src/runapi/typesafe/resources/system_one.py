@@ -6,7 +6,6 @@ from typing import Any, Optional
 
 from runapi.core import Resource, RequestOptions
 
-from ..contract_gen import CONTRACT
 from ..types import SystemOneResponse
 
 
@@ -30,5 +29,4 @@ class SystemOne(Resource):
             The typed answers, usage, and billing facts.
         """
         compacted = self._compact_params(params)
-        self._validate_contract(CONTRACT["system-one"], compacted)
         return self._request("post", self.ENDPOINT, body=compacted, options=options)

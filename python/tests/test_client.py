@@ -1,7 +1,7 @@
 import pytest
 
 from runapi.core import config
-from runapi.core.errors import AuthenticationError, ValidationError
+from runapi.core.errors import AuthenticationError
 from runapi.typesafe import TypesafeClient
 from runapi.typesafe.resources.system_one import SystemOne
 from runapi.typesafe.types import SystemOneResponse
@@ -70,12 +70,3 @@ def test_system_one_posts_once_and_returns_typed():
     assert result.answers == {"recommendation": {"type": "choice", "choice": "Option A", "probabilities": {"Option A": 0.88, "Option B": 0.12}, "confidence": 0.81}}
     assert result.model == "jev-1.13.0"
     assert result.usage == {"input_tokens": 318, "output_tokens": 34}
-
-
-def test_system_one_requires_model():
-    client = TypesafeClient(api_key="k", http_client=FakeHttp())
-    with pytest.raises(ValidationError, match="model"):
-        client.system_one.run(
-            state={"candidate": "Option A"},
-            questions={"recommendation": {"type": "choice", "instructions": "Choose the matching candidate.", "criteria": {"Option A": "The candidate is Option A.", "Option B": "The candidate is Option B."}}},
-        )

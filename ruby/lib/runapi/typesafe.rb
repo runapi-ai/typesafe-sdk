@@ -2,7 +2,6 @@
 
 require "runapi/core"
 require_relative "typesafe/types"
-require_relative "typesafe/contract_gen"
 require_relative "typesafe/resources/system_one"
 require_relative "typesafe/client"
 

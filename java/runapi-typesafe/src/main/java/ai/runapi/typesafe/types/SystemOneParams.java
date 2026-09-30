@@ -11,9 +11,9 @@ public final class SystemOneParams {
   private final Map<String, Object> questions;
 
   private SystemOneParams(Builder builder) {
-    this.state = java.util.Objects.requireNonNull(builder.state, "state");
-    this.model = TypesafeParamUtils.requireNonBlankTrim(builder.model, "model");
-    this.questions = java.util.Objects.requireNonNull(builder.questions, "questions");
+    this.state = builder.state;
+    this.model = builder.model;
+    this.questions = builder.questions;
   }
 
   /** Creates a new SystemOneParams builder. */
@@ -59,7 +59,7 @@ public final class SystemOneParams {
 
     /** Sets the model slug using a string value. */
     public Builder model(String value) {
-      this.model = TypesafeParamUtils.requireNonBlankTrim(value, "model");
+      this.model = value;
       return this;
     }
 

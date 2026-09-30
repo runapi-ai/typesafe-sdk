@@ -56,8 +56,5 @@ type SystemOne struct{ http core.HTTPClient }
 func (r *SystemOne) Run(ctx context.Context, params SystemOneParams, opts ...option.RequestOption) (*SystemOneResponse, error) {
 	requestOptions, _ := option.ResolveRequestOptions(opts...)
 	body := core.CompactParams(params)
-	if err := core.ValidateParams(contractSchema["system-one"], body); err != nil {
-		return nil, err
-	}
 	return core.PostJSON[SystemOneResponse](ctx, r.http, systemOnePath, body, requestOptions)
 }

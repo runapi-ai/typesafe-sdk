@@ -1,6 +1,5 @@
-import type { HttpClient, RequestOptions, ActionSchema } from '@runapi.ai/core';
-import { compactParams, validateParams } from '@runapi.ai/core';
-import { contract } from '../contract_gen';
+import type { HttpClient, RequestOptions } from '@runapi.ai/core';
+import { compactParams } from '@runapi.ai/core';
 import type { SystemOneParams, SystemOneResponse } from '../types';
 
 const ENDPOINT = '/api/v1/typesafe/system_one';
@@ -20,7 +19,6 @@ export class SystemOne {
    */
   async run(params: SystemOneParams, options?: RequestOptions): Promise<SystemOneResponse> {
     const body = compactParams(params);
-    validateParams(contract['system-one'] as ActionSchema, body as Record<string, unknown>);
     return this.http.request<SystemOneResponse>('POST', ENDPOINT, {
       body,
       ...options,

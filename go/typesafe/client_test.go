@@ -68,15 +68,3 @@ func TestSystemOneRunSendsCorrectRequest(t *testing.T) {
 		t.Fatalf("unexpected response metadata: %#v", resp)
 	}
 }
-
-func TestSystemOneRunRequiresModel(t *testing.T) {
-	stub := &stubHTTPClient{}
-	client := NewClientWithHTTP(stub)
-	_, err := client.SystemOne.Run(context.Background(), SystemOneParams{
-		State:     map[string]any{"candidate": "Option A"},
-		Questions: map[string]any{"recommendation": map[string]any{"type": "choice", "instructions": "Choose the matching candidate.", "criteria": map[string]any{"Option A": "The candidate is Option A.", "Option B": "The candidate is Option B."}}},
-	})
-	if err == nil {
-		t.Fatal("expected validation error")
-	}
-}

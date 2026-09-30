@@ -2,7 +2,7 @@
 
 [![Maven Central](https://img.shields.io/maven-central/v/ai.runapi/runapi-typesafe)](https://central.sonatype.com/artifact/ai.runapi/runapi-typesafe)
 
-The TypeSafe Java SDK is the language-specific package for TypeSafe Jev on RunAPI. Use it when your Java application needs typed builders, strict request validation, and consistent RunAPI errors for structured decisions.
+The TypeSafe Java SDK is the language-specific package for TypeSafe Jev on RunAPI. Use it when your Java application needs typed builders, server-side request validation, and consistent RunAPI errors for structured decisions.
 
 This README is the Java package guide inside the public `typesafe-sdk` repository. For the repository overview, start at `../README.md`; for model details, use https://runapi.ai/models/jev; for API reference, use https://runapi.ai/docs/api/typesafe/system-one; for SDK docs, use https://runapi.ai/docs/resources/sdks.
 
@@ -16,7 +16,7 @@ Gradle:
 
 ```kotlin
 dependencies {
-  implementation("ai.runapi:runapi-typesafe:0.2.0")
+  implementation("ai.runapi:runapi-typesafe:0.3.0")
 }
 ```
 
@@ -26,7 +26,7 @@ Maven:
 <dependency>
   <groupId>ai.runapi</groupId>
   <artifactId>runapi-typesafe</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
@@ -34,7 +34,7 @@ Use the BOM when multiple RunAPI Java modules are installed:
 
 ```kotlin
 dependencies {
-  implementation(platform("ai.runapi:runapi-bom:0.7.0"))
+  implementation(platform("ai.runapi:runapi-bom:0.9.0"))
   implementation("ai.runapi:runapi-typesafe")
 }
 ```
@@ -83,12 +83,9 @@ All SDK errors extend `RunApiException`.
 ```java
 import ai.runapi.core.errors.RateLimitException;
 import ai.runapi.core.errors.RunApiException;
-import ai.runapi.core.errors.ValidationException;
 
 try {
   client.systemOne().run(params);
-} catch (ValidationException error) {
-  System.err.println(error.getMessage());
 } catch (RateLimitException error) {
   System.err.println(error.getRetryAfter());
 } catch (RunApiException error) {

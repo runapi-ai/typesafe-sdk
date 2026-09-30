@@ -33,15 +33,4 @@ describe('TypeSafe resources', () => {
     expect(result.model).toBe('jev-1.13.0');
     expect(result.usage).toEqual({ input_tokens: 318, output_tokens: 34 });
   });
-
-  it('rejects requests without model', async () => {
-    const systemOne = new SystemOne(mockHttp);
-
-    await expect(
-      systemOne.run({
-        state: { candidate: 'Option A' },
-        questions: { recommendation: { type: 'choice', instructions: 'Choose the matching candidate.', criteria: { 'Option A': 'The candidate is Option A.', 'Option B': 'The candidate is Option B.' } } },
-      } as never),
-    ).rejects.toThrow(/model/);
-  });
 });

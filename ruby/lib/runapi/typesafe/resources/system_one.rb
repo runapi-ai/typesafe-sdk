@@ -17,7 +17,6 @@ module RunApi
 
         def run(options: nil, **params)
           params = compact_params(params)
-          validate_contract!(CONTRACT["system-one"], params)
           request(:post, ENDPOINT, body: params, options: options)
         end
       end
